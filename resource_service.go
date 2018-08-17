@@ -31,6 +31,7 @@ func resourceService() *schema.Resource {
 		Read:   resourceServiceRead,
 		Update: resourceServiceUpdate,
 		Delete: resourceServiceDelete,
+		Exists: resourceServiceExists,
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
@@ -134,4 +135,20 @@ func resourceServiceDelete(d *schema.ResourceData, m interface{}) error {
 	d.Set("credentials", nil)
 	d.Set("enabled", false)
 	return nil
+}
+
+// resourceServiceExists checks if the service is enabled
+func resourceServiceExists(d *schema.ResourceData, m interface{}) (bool, error) {
+	client := m.(confidant.Client)
+	name := d.Id()
+
+	service, err := client.GetService(name)
+	if err != nil {
+		if err.Error() == "Service Doesn't Exist" {
+			return false, nil
+		}
+		// Some other error, default to true
+		return true, err
+	}
+	return service.Enabled, nil
 }
