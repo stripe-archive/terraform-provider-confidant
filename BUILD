@@ -11,7 +11,6 @@ go_library(
     srcs = [
         "main.go",
         "provider.go",
-        "resource_credential_assignment.go",
         "resource_service.go",
     ],
     importpath = "github.com/stripe/terraform-provider-confidant",
