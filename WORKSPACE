@@ -42,6 +42,6 @@ go_repository(
 
 go_repository(
     name = "com_github_stripe_go_confidant_client",
-    commit = "d5b23f2f0eb2247b8d10a5176c62f97681c33631",
+    commit = "427bcaed65d41ba55d3def092d8b3f2831a19e72",
     importpath = "github.com/stripe/go-confidant-client",
 )
