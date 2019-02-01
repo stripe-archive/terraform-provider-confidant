@@ -1,6 +1,6 @@
 # Terraform Provider for Confidant [![Build Status](https://travis-ci.org/stripe/terraform-provider-confidant.svg?branch=master)](https://travis-ci.org/stripe/terraform-provider-confidant)
 
-This terraform provider is used to resources supported by [Confidant](https://lyft.github.io/confidant/).
+This terraform provider is used to manage resources supported by [Confidant](https://lyft.github.io/confidant/).
 
 ## Requirements
 
