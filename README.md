@@ -20,7 +20,7 @@ $ git clone git@github.com:stripe/terraform-provider-confidant
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/tripe/terraform-provider-confidant
+$ cd $GOPATH/src/github.com/stripe/terraform-provider-confidant
 $ go install
 ```
 
