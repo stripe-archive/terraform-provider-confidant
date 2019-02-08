@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/stripe/go-confidant-client/confidant"
@@ -56,7 +55,7 @@ func resourceService() *schema.Resource {
 }
 
 // resourceServiceCreate calls CreateService with no credentials.
-// If the service already exists, it sets enabled to true.
+// If the service already exists, it sets enabled to true and updates the credentials.
 func resourceServiceCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(confidant.Client)
 	name, ok := d.Get("name").(string)
@@ -72,7 +71,9 @@ func resourceServiceCreate(d *schema.ResourceData, m interface{}) error {
 		if err.Error() != "Service Already Exists" {
 			return err
 		}
-		log.Println("Service already exists, setting Enabled to True")
+		if _, err = client.SetServiceCredentials(name, credentials); err != nil {
+			return err
+		}
 		_, err := client.EnableService(name)
 		if err != nil {
 			return err
